@@ -7,7 +7,12 @@ const multer = require("multer");
 const fs = require("fs");
 const upload = multer({ storage: storage });
 const cors = require("cors");
+const cron = require("node-cron");
+const shell = require("shelljs");
 
+cron.schedule(" */15 * * * *", () => {
+  console.log("running");
+});
 //cors package
 app.use(
   cors({
