@@ -8,7 +8,6 @@ const fs = require("fs");
 const upload = multer({ storage: storage });
 const cors = require("cors");
 const cron = require("node-cron");
-// const notFoundImage = require("./photo/imagenotfound.png");
 
 cron.schedule(" */15 * * * *", () => {
   console.log("running");
@@ -31,7 +30,8 @@ app.post("/book", upload.single("image"), async (req, res) => {
   console.log(req.file);
   let fileName;
   if (!req.file) {
-    fileName = "./imagenotfound.png";
+    fileName =
+      "https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
   } else {
     fileName = "http://localhost:3000/" + req.file.filename;
   }
