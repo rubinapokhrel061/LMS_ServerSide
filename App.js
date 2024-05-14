@@ -8,7 +8,7 @@ const fs = require("fs");
 const upload = multer({ storage: storage });
 const cors = require("cors");
 const cron = require("node-cron");
-const shell = require("shelljs");
+// const notFoundImage = require("./photo/imagenotfound.png");
 
 cron.schedule(" */15 * * * *", () => {
   console.log("running");
@@ -31,7 +31,7 @@ app.post("/book", upload.single("image"), async (req, res) => {
   console.log(req.file);
   let fileName;
   if (!req.file) {
-    fileName = "https://www.abnews24bd.com/images/page-not-found.jpg";
+    fileName = "./imagenotfound.png";
   } else {
     fileName = "http://localhost:3000/" + req.file.filename;
   }
