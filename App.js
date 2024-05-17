@@ -33,8 +33,9 @@ app.post("/book", upload.single("image"), async (req, res) => {
     fileName =
       "https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
   } else {
-    fileName = "http://localhost:3000/" + req.file.filename;
+    fileName = "https://lms-server-v1j9.onrender.com/" + req.file.filename;
   }
+
   const {
     bookName,
     bookPrice,
@@ -128,7 +129,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
   if (req.file) {
     const oldImagePath = oldData.imageUrl;
     console.log(oldImagePath);
-    const localHostUrlLength = "http://localhost:3000/".length;
+    const localHostUrlLength = "https://lms-server-v1j9.onrender.com/".length;
     const newOldImagePath = oldImagePath.slice(localHostUrlLength);
     console.log(newOldImagePath);
     fs.unlink(`storage/${newOldImagePath}`, (err) => {
@@ -138,7 +139,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
         console.log("file deleted successfully");
       }
     });
-    fileName = "http://localhost:3000/" + req.file.filename;
+    fileName = "https://lms-server-v1j9.onrender.com/" + req.file.filename;
   }
 
   await Book.findByIdAndUpdate(id, {
