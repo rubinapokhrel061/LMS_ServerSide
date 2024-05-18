@@ -95,8 +95,9 @@ app.delete("/book/:id", async (req, res) => {
   const id = req.params.id;
   const oldData = await Book.findById(id);
   const ImagePath = oldData.imageUrl;
-
-  const localHostUrlLength = `${req.protocol}://${req.get("host")}`.length;
+  console.log(req.get("host"));
+  const localHostUrlLength = "https://lms-server-v1j9.onrender.com/".length;
+  // const localHostUrlLength = `${req.protocol}://${req.get("host")}/`.length;
   const newImagePath = ImagePath.slice(localHostUrlLength);
 
   fs.unlink(`storage/${newImagePath}`, (err) => {
