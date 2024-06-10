@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const bookSchema = new Schema({
   bookName: {
     type: String,
+    required: true,
     // unique: true,
   },
   bookPrice: {
@@ -10,6 +11,7 @@ const bookSchema = new Schema({
   },
   isbnNumber: {
     type: Number,
+    required: true,
   },
   authorName: {
     type: String,

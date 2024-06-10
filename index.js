@@ -8,6 +8,7 @@ const fs = require("fs");
 const upload = multer({ storage: storage });
 const cors = require("cors");
 const cron = require("node-cron");
+const backendUrl = require("./config");
 
 cron.schedule(" */15 * * * *", () => {
   console.log("running");
@@ -33,7 +34,7 @@ app.post("/book", upload.single("image"), async (req, res) => {
     fileName =
       "https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
   } else {
-    fileName = "https://lms-server-v1j9.onrender.com/" + req.file.filename;
+    fileName = " `${backendUrl}`" + req.file.filename;
   }
 
   const {
@@ -96,7 +97,7 @@ app.delete("/book/:id", async (req, res) => {
   const oldData = await Book.findById(id);
   const ImagePath = oldData.imageUrl;
   console.log(req.get("host"));
-  const localHostUrlLength = "https://lms-server-v1j9.onrender.com/".length;
+  const localHostUrlLength = `${backendUrl}`.length;
   // const localHostUrlLength = `${req.protocol}://${req.get("host")}/`.length;
   const newImagePath = ImagePath.slice(localHostUrlLength);
 
@@ -130,7 +131,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
   if (req.file) {
     const oldImagePath = oldData.imageUrl;
     console.log(oldImagePath);
-    const localHostUrlLength = "https://lms-server-v1j9.onrender.com/".length;
+    const localHostUrlLength = `${backendUrl}`.length;
     const newOldImagePath = oldImagePath.slice(localHostUrlLength);
     console.log(newOldImagePath);
     fs.unlink(`storage/${newOldImagePath}`, (err) => {
@@ -140,7 +141,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
         console.log("file deleted successfully");
       }
     });
-    fileName = "https://lms-server-v1j9.onrender.com/" + req.file.filename;
+    fileName = `${backendUrl}` + req.file.filename;
   }
 
   await Book.findByIdAndUpdate(id, {
