@@ -114,7 +114,7 @@ app.delete("/book/:id", async (req, res) => {
   });
 });
 
-//update Operation
+//update Operation in lms
 app.patch("/book/:id", upload.single("image"), async (req, res) => {
   const id = req.params.id; //kun book update garney id jun cahi request ma aako
 
