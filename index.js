@@ -34,7 +34,7 @@ app.post("/book", upload.single("image"), async (req, res) => {
     fileName =
       "https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
   } else {
-    fileName = " `${backendUrl}`" + req.file.filename;
+    fileName = `${backendUrl}` + req.file.filename;
   }
 
   const {
