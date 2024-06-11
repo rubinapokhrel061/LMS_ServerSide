@@ -10,7 +10,7 @@ const cors = require("cors");
 const cron = require("node-cron");
 // const backendUrl = require("./config");
 
-cron.schedule(" */15 * * * *", () => {
+cron.schedule(" */10 * * * *", () => {
   console.log("running");
 });
 //cors package
